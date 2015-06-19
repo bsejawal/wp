@@ -7,13 +7,6 @@ function dempWP_resources(){
 
 add_action('wp_enqueue_scripts', 'dempWP_resources');
 
-// Navigation Menus
-register_nav_menus(array(
-	'primary' => __( 'Primary Menu'),
-	'footer' => __( 'Footer Menu'),
-	));
-
-
 // Get top ancestor
 function get_top_ancestor_id(){
 
@@ -35,6 +28,27 @@ function has_children() {
 	$pages = get_pages('child_of=' . $post->ID);
 	return count($pages);
 }
+
+// Customize excpert word count length
+function  custom_excerpt_length(){
+    return 25;
+}
+
+add_filter("excerpt_length", "custom_excerpt_length");
+
+//Theme setup
+function wordPress_setup(){
+  // Navigation Menus
+register_nav_menus(array(
+	'primary' => __( 'Primary Menu'),
+	'footer' => __( 'Footer Menu'),
+	));
+
+// Add featured image support
+add_theme_support('post-thumbnails');
+}
+
+add_action('after_setup_theme','wordPress_setup');
 
 
 ?>

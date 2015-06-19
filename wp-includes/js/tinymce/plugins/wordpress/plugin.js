@@ -63,7 +63,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 
 	// Hide the toolbars after loading
 	editor.on( 'PostRender', function() {
-		if ( getUserSetting('hidetb', '0') === '0' ) {
+		if ( editor.getParam( 'wordpress_adv_hidden', true ) && getUserSetting( 'hidetb', '0' ) === '0' ) {
 			toggleToolbars( 'hide' );
 		}
 	});
@@ -90,6 +90,10 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 				e.content = e.content.replace( /<!--nextpage-->/g,
 					'<img src="' + tinymce.Env.transparentSrc + '" class="wp-more-tag mce-wp-nextpage" ' +
 						'title="Page break" data-mce-resize="false" data-mce-placeholder="1" />' );
+			}
+
+			if ( e.content.indexOf( '<?"' ) !== -1 ) {
+				e.content = e.content.replace( /<\?"/g, '' );
 			}
 		}
 	});
@@ -317,7 +321,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 			dom.bind( doc, 'dragstart dragend dragover drop', function( event ) {
 				if ( typeof window.jQuery !== 'undefined' ) {
 					// Trigger the jQuery handlers.
-					window.jQuery( document ).triggerHandler( event.type );
+					window.jQuery( document ).trigger( new window.jQuery.Event( event ) );
 				}
 			});
 		}
