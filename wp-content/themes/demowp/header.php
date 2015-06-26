@@ -7,11 +7,17 @@
 		<?php wp_head(); ?>
 	</head>
 <body <?php body_class(); ?>>
-
 	<div class="container">
 
 		<!-- site-header -->
 		<header class="site-header">
+
+                    <!-- hd-search -->
+                    <div class="hd-search">
+                        <?php get_search_form(); ?>                        
+                    </div><!-- /site-header -->
+                    
+
 			<h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
 			<h5><?php bloginfo('description'); ?><?php if (is_page('portfolio')) { ?>
 			- Thank you for viewing my work
@@ -28,5 +34,6 @@
 
 				<?php wp_nav_menu( $args); ?>
 			</nav>
+
 		</header>
 		<!-- /site-header -->

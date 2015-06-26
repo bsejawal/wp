@@ -22,6 +22,9 @@ if(have_posts()) :
                 }
                 ?>
                 </p>
+                <?php
+                    the_post_thumbnail('banner-image');
+                ?>
 		<?php the_content(); ?>
 	</article>
 <?php	endwhile;
